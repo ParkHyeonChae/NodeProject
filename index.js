@@ -1,4 +1,11 @@
+// 1. package생성 : npm init
+// 2. express설치 : npm install express --save
+// 3. mongoose설치 : npm install mongoose --save
+// 4. index.js 생성
+// 5. package.json Script 수정 : "start": "node index.js",
+
 // 서버 실행 npm run start (package.json script 설정 명렁어)
+
 
 var secrets = require('./secrets.json');
 const express = require('express') // express 모듈 가져오기
