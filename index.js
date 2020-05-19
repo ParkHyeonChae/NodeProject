@@ -6,8 +6,11 @@
 
 // 6. body-parser: npm install body-parser --save
 
-// 서버 실행 npm run start (package.json script 설정 명렁어)
+// 7. Nodemon 설치 (서버 재시작 툴) : npm install nodemon --save-dev (-dev는 개발모드)
 
+
+// 서버 실행 npm run start (package.json script 설정 명렁어)
+// Nodemon 사용 서버 실행 npm run backend (package.json script 설정)
 
 var secrets = require('./secrets.json');
 const express = require('express') // express 모듈 가져오기
@@ -30,7 +33,7 @@ mongoose.connect('mongodb+srv://' + secrets.mongodb_user + ':' + secrets.mongodb
     .catch(err => console.log(err))
 
 
-app.get('/', (req, res) => res.send('Hello World!~')) // 루트 디렉토리 hello world 출력
+app.get('/', (req, res) => res.send('Hello World!~asdf')) // 루트 디렉토리 hello world 출력
 
 app.post('/register', (req, res) => {
     // 여기서 회원가입시 필요한 정보를 클라에서 가져오면 DB에 넣어준다
