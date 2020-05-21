@@ -20,6 +20,8 @@ const port = 5000 // 5000번 포트 백서버
 const bodyParser = require('body-parser');
 const { User } = require('./models/User');
 
+const config = require('./config/key')
+
 // application/x-www-form-urlencoded 데이터 분석 가져오기 가능 설정
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -27,7 +29,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const mongoose = require('mongoose') // mongoose 설치, mongodb 연결
-mongoose.connect('mongodb+srv://' + secrets.mongodb_user + ':' + secrets.mongodb_pw + '@boilerplate-gsiul.mongodb.net/test?retryWrites=true&w=majority', {
+// mongoose.connect('mongodb+srv://' + secrets.mongodb_user + ':' + secrets.mongodb_pw + '@boilerplate-gsiul.mongodb.net/test?retryWrites=true&w=majority', {
+mongoose.connect(config.mongoURI, {
     useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false // 에러방지 설정값
 }).then(() => console.log('MongoDB Connected...'))
     .catch(err => console.log(err))
