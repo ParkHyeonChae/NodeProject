@@ -8,6 +8,7 @@
 
 // 7. Nodemon 설치 (서버 재시작 툴) : npm install nodemon --save-dev (-dev는 개발모드)
 
+// 8. 비밀번호 암호화 Bcrypt 라이브러리 사용 : npm install bcrypt --save
 
 // 서버 실행 npm run start (package.json script 설정 명렁어)
 // Nodemon 사용 서버 실행 npm run backend (package.json script 설정)
