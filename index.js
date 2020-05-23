@@ -52,4 +52,28 @@ app.post('/register', (req, res) => {
     })
 })
 
+app.post('/login', (req, res) => {
+    // 요청된 이메일을 DB에서 있는지 찾음
+    User.findOne({ email: req.body.email }, (err, user) => {
+        if(!user) {
+            return res.json({
+                loginSuccess: false, 
+                message: "제공된 이메일에 해당하는 유저가 없습니다."
+            })
+        }
+        // 요청된 이메일이 DB에 있으면 PW가 일치 확인
+        user.comparePassword(req.body.password, (err, isMatch) => {
+            if(!isMatch)
+            return res.json({ loginSuccess: false, message: "비밀번호가 틀렸습니다." })
+            
+            // PW일치 시 토큰 생성
+            user.generateToken((err, user) => {
+                
+            })
+
+        })
+    })
+})
+
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`)) // 지정포트에 앱 실행
