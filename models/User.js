@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const saltRounds = 10 // 10자리로 암호화
+const jwt = require('jsonwebtoken');
 
 const userSchema = mongoose.Schema({
     name: {
@@ -14,7 +15,7 @@ const userSchema = mongoose.Schema({
     },
     password: {
         type: String,
-        maxlength: 50
+        maxlength: 150
     },
     lastname: {
         type: String,
@@ -57,8 +58,23 @@ userSchema.methods.comparePassword = function(plainPassword, cb) {
     // 입력된 비밀번호와 엄호화된 비밀번호 체크
     // 이미 암호화된 pw 복호화 불가, 입력 pw 다시 암호화 후 비교
     bcrypt.compare(plainPassword, this.password, function(err, isMatch){
-        if(err) return cb(err),
-            cb(null, isMatch)
+        if(err) return cb(err);
+            cb(null, isMatch);
+    })
+}
+
+userSchema.methods.generateToken = function(cb) {
+    var user = this;
+    var token = jwt.sign(user._id.toHexString(), 'secretToken')
+
+    // user._id + 'secretToken' = token
+    // ->
+    // 'secretToken' -> user._id
+
+    user.token = token
+    user.save(function(err, user) {
+        if(err) return cb(err)
+        cb(null, user)
     })
 }
 

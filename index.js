@@ -9,6 +9,8 @@
 // 7. Nodemon 설치 (서버 재시작 툴) : npm install nodemon --save-dev (-dev는 개발모드)
 
 // 8. 비밀번호 암호화 Bcrypt 라이브러리 사용 : npm install bcrypt --save
+// 9. 로그인 토큰생성 라이브러리 설치 : npm install jsonwebtoken --save
+// 10. 쿠키저장용 라이브러리 설치 : npm install cookie-parser --save
 
 // 서버 실행 npm run start (package.json script 설정 명렁어)
 // Nodemon 사용 서버 실행 npm run backend (package.json script 설정)
@@ -19,6 +21,7 @@ const app = express() // 앱 생성
 const port = 5000 // 5000번 포트 백서버
 
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser')
 const { User } = require('./models/User');
 
 const config = require('./config/key')
@@ -28,6 +31,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // application/json JSON 타입 데이터 분석 가능 설정
 app.use(bodyParser.json());
+
+app.use(cookieParser());
 
 const mongoose = require('mongoose') // mongoose 설치, mongodb 연결
 // mongoose.connect('mongodb+srv://' + secrets.mongodb_user + ':' + secrets.mongodb_pw + '@boilerplate-gsiul.mongodb.net/test?retryWrites=true&w=majority', {
@@ -39,7 +44,7 @@ mongoose.connect(config.mongoURI, {
 
 app.get('/', (req, res) => res.send('Hello World!~asdf')) // 루트 디렉토리 hello world 출력
 
-app.post('/register', (req, res) => {
+app.post('/api/users/register', (req, res) => {
     // 여기서 회원가입시 필요한 정보를 클라에서 가져오면 DB에 넣어준다
 
     const user = new User(req.body)
@@ -52,7 +57,7 @@ app.post('/register', (req, res) => {
     })
 })
 
-app.post('/login', (req, res) => {
+app.post('/api/users/login', (req, res) => {
     // 요청된 이메일을 DB에서 있는지 찾음
     User.findOne({ email: req.body.email }, (err, user) => {
         if(!user) {
@@ -68,9 +73,13 @@ app.post('/login', (req, res) => {
             
             // PW일치 시 토큰 생성
             user.generateToken((err, user) => {
+                if(err) return res.status(400).send(err);
                 
+                // 쿠키에 토큰 저장
+                res.cookie("x-auth", user.token)
+                .status(200)
+                .json({ loginSuccess: true, userId: user._id })
             })
-
         })
     })
 })
