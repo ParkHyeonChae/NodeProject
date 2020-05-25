@@ -23,6 +23,7 @@ const port = 5000 // 5000번 포트 백서버
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser')
 const { User } = require('./models/User');
+const { auth } = require('./middleware/auth');
 
 const config = require('./config/key')
 
@@ -84,5 +85,17 @@ app.post('/api/users/login', (req, res) => {
     })
 })
 
+app.get('/api/users/auth', auth, (req, res) => {
+    // 여기까지 미들웨어를 통과해 왔다는 소리는 Authentication이 True
+    res.status(200).json({
+        _id: req.user._id,
+        isAdmin: req.user.role === 0 ? false : true, // role이 0이면 일반사용자, 0이아니면 관리자
+        email: req.user.email,
+        name: req.user.name,
+        lastname: req.user.lastname,
+        role: req.user.role,
+        image: req.user.image
+    })
+})
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`)) // 지정포트에 앱 실행
