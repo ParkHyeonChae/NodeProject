@@ -22,8 +22,8 @@ const port = 5000 // 5000번 포트 백서버
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser')
-const { User } = require('./models/User');
 const { auth } = require('./middleware/auth');
+const { User } = require('./models/User');
 
 const config = require('./config/key')
 
@@ -77,7 +77,7 @@ app.post('/api/users/login', (req, res) => {
                 if(err) return res.status(400).send(err);
                 
                 // 쿠키에 토큰 저장
-                res.cookie("x-auth", user.token)
+                res.cookie("x_auth", user.token)
                 .status(200)
                 .json({ loginSuccess: true, userId: user._id })
             })
@@ -90,11 +90,21 @@ app.get('/api/users/auth', auth, (req, res) => {
     res.status(200).json({
         _id: req.user._id,
         isAdmin: req.user.role === 0 ? false : true, // role이 0이면 일반사용자, 0이아니면 관리자
+        isAuth: true,
         email: req.user.email,
         name: req.user.name,
         lastname: req.user.lastname,
         role: req.user.role,
         image: req.user.image
+    })
+})
+
+app.get('/api/users/logout', auth, (req, res) => {
+    User.findOneAndUpdate({ _id: req.user._id }, { token: "" }, (err, user) => {
+        if(err) return res.json({ success: false, err });
+        return res.status(200).send({
+            success: true
+        })
     })
 })
 

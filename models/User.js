@@ -15,7 +15,7 @@ const userSchema = mongoose.Schema({
     },
     password: {
         type: String,
-        maxlength: 150
+        minlength: 5
     },
     lastname: {
         type: String,
@@ -82,11 +82,11 @@ userSchema.statics.findByToken = function(token, cb) {
     var user = this;
 
     // 토큰을 decode 함
-    jwt.verify(token, 'secretToken', function(err, decoded) {
+    jwt.verify(token, 'secretToken', function (err, decoded) {
         // USER 아이디를 이용해서 USER를 찾고
         // 클라에서 가져온 토큰과 DB에 보관된 토큰이 일치하는지 확인
 
-        user.findOne({ "_id": decoded, "tokne": token }, function(err, user) {
+        user.findOne({ "_id": decoded, "token": token }, function (err, user) {
             if(err) return cb(err);
             cb(null, user)
         })
