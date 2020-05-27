@@ -12,10 +12,13 @@
 // 9. 로그인 토큰생성 라이브러리 설치 : npm install jsonwebtoken --save
 // 10. 쿠키저장용 라이브러리 설치 : npm install cookie-parser --save
 
+// 11. ReactJS 설치 : 특정 디렉토리 설치 - cd client, npx install create-react-app .
+// npm이 아닌 npx사용 이유 : npm은 -g로 pc에 글로벌설치가 필요, npx 등장 이후 부터 node 레지스트리에서 그냥 찾아서 이용 -> 항상 최신버전 이용가능, 디스크공간 절약
+
 // 서버 실행 npm run start (package.json script 설정 명렁어)
 // Nodemon 사용 서버 실행 npm run backend (package.json script 설정)
 
-var secrets = require('./secrets.json');
+var secrets = require('../secrets.json');
 const express = require('express') // express 모듈 가져오기
 const app = express() // 앱 생성
 const port = 5000 // 5000번 포트 백서버
