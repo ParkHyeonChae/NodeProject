@@ -17,7 +17,9 @@
 
 // 12. (client) 라우팅을 위한 react-router-dom 설치 : cd client, npm install react-router-dom --save
 // 13. (client) AXIOS 설치 : cd client, npm install axios --save
-// 14. (client) CORS 회피를 위한 PROXY 설치 : npm install http=proxy-middleware --save
+// 14. (client) CORS 회피를 위한 PROXY 설치 : npm install http-proxy-middleware --save
+
+// 15. back, client server 동시 실행을 위한 Concurrently설치 : npm install concurrently --save
 
 // 서버 실행 npm run start (package.json script 설정 명렁어)
 // Nodemon 사용 서버 실행 npm run backend (package.json script 설정)
