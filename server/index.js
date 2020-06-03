@@ -21,6 +21,8 @@
 
 // 15. back, client server 동시 실행을 위한 Concurrently설치 : npm install concurrently --save
 
+// 16. (client) CSS Framework - Ant Deisign 사용 : cd client, npm install antd --save
+
 // 서버 실행 npm run start (package.json script 설정 명렁어)
 // Nodemon 사용 서버 실행 npm run backend (package.json script 설정)
 
