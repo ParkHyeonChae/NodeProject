@@ -23,6 +23,8 @@
 
 // 16. (client) CSS Framework - Ant Deisign 사용 : cd client, npm install antd --save
 
+// 17. (client) Redux 설치 - cd clent, npm install redux react-react-redux redux-promise redux-thunk --save
+
 // 서버 실행 npm run start (package.json script 설정 명렁어)
 // Nodemon 사용 서버 실행 npm run backend (package.json script 설정)
 

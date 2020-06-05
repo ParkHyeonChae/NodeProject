@@ -1,0 +1,44 @@
+1. package생성 : npm init
+2. express설치 : npm install express --save
+3. mongoose설치 : npm install mongoose --save
+4. index.js 생성
+5. package.json Script 수정 : "start": "node index.js",
+
+6. body-parser: npm install body-parser --save
+
+7. Nodemon 설치 (서버 재시작 툴) : npm install nodemon --save-dev (-dev는 개발모드)
+
+8. 비밀번호 암호화 Bcrypt 라이브러리 사용 : npm install bcrypt --save
+9. 로그인 토큰생성 라이브러리 설치 : npm install jsonwebtoken --save
+10. 쿠키저장용 라이브러리 설치 : npm install cookie-parser --save
+
+11. ReactJS 설치 : 특정 디렉토리 설치 - cd client, npx install create-react-app .
+npm이 아닌 npx사용 이유 : npm은 -g로 pc에 글로벌설치가 필요, npx 등장 이후 부터 node 레지스트리에서 그냥 찾아서 이용 -> 항상 최신버전 이용가능, 디스크공간 절약
+
+12. (client) 라우팅을 위한 react-router-dom 설치 : cd client, npm install react-router-dom --save
+13. (client) AXIOS 설치 : cd client, npm install axios --save
+14. (client) CORS 회피를 위한 PROXY 설치 : npm install http-proxy-middleware --save
+
+15. back, client server 동시 실행을 위한 Concurrently설치 : npm install concurrently --save
+
+16. (client) CSS Framework - Ant Deisign 사용 : cd client, npm install antd --save
+
+17. (client) Redux 설치 - cd clent, npm install redux react-react-redux redux-promise redux-thunk --save
+
+서버 실행 npm run start (package.json script 설정 명렁어)
+Nodemon 사용 서버 실행 npm run backend (package.json script 설정)
+
+------------------------------------------------------------------------------
+
+Redux란? - Predictable state container for JavaScript apps. 상태 관리 라이브러리
+
+리액트에서는 Props, state
+
+- Props는 컴포넌트간의 무언가를 주고받을때는 Props 이용, 부모컨테이너 -> 자식컨테이너
+- Props는 부모컨테이너에서 자식컨테이너로 받은 것은 바뀔수 없다. 바꿀려면 부모컨테이너를 바꿔야함
+
+- Stats는 부모컨테이너에서 자식컨테이너가 아닌 컴퍼넌트 안에서 데이터전달, State가 변하면 re-rendering
+
+
+리덕스는 이러한 State를 관리함
+
