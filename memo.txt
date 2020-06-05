@@ -42,3 +42,17 @@ Redux란? - Predictable state container for JavaScript apps. 상태 관리 라�
 
 리덕스는 이러한 State를 관리함
 
+
+
+React의 Class Component VS Functional Component
+
+1. Class Component
+- 더 많은 기능
+- 복잡한 코드
+- 퍼포먼스 저하
+
+2. Functional Component
+- 제공되는 기능 제한
+- 짧은 코드
+- 퍼포먼스 증가
+(React Hook이 생기고 부터 기능 추가)
